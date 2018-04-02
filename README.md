@@ -1,5 +1,5 @@
 # Step-by-Step guide to a ZOC Masternode setup
-A novices guide to an Ubunutu 16.04 install
+A novices guide to an Ubuntu 16.04 install
 
 ***
 
@@ -150,10 +150,18 @@ Any donation is highly appreciated
 
 
 
+
+
 **ZOC**: ZUb9h1F5yrut26hnFMjZa6PwbakR7WSudb 
+
 **BTC**: 3MprejNeXAHVvNA4mfrMzymZakE7x2Efra 
+
 **ETH**: 0x9B11A49423bb65936D03df9abB98d00B438b0010 
+
 **LTC**: MC7HmFHhHPQg3pFbzeuTPPXXPe3SZWJJHE 
+
+
+
 
 
 **Good luck!**
