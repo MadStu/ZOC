@@ -20,7 +20,7 @@ cd $HOME/tempZOC
 sudo chmod 777 autogen.sh
 sudo ./autogen.sh
 #sudo ./configure
-sudo ./configure CXXFLAGS="--param ggc-min-expand=1 --param ggc-min-heapsize=32768"
+sudo ./configure --without-gui CXXFLAGS="--param ggc-min-expand=1 --param ggc-min-heapsize=32768"
 sudo chmod +x share/genbuild.sh
 sudo make
 sudo make install
