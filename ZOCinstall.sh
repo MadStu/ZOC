@@ -43,15 +43,17 @@ zerooned -daemon
 sleep 10
 MKEY=$(zeroone-cli masternode genkey)
 zeroone-cli stop
-sleep 2
+sleep 5
 echo -e "masternode=1\nmasternodeprivkey=$MKEY\n\n" >> /$HOME/.zeroonecore/zeroone.conf
-sleep 2
+sleep 5
 sudo rm -rf $HOME/tempZOC
 zerooned -daemon
 sleep 3
 zeroone-cli mnsync status
 sleep 1
-echo "Now would be a good time to setup your Transaction ID and VOUT on your windows wallet"
+echo " "
+echo "Now would be a good time to grab your Transaction ID and VOUT"
+echo "Grab them by typing 'masternode outputs' into the debug console"
 sleep 3
 echo "You'll need the Masternode Key which is:"
 echo "$MKEY"
@@ -59,8 +61,19 @@ sleep 3
 echo "You'll also need your server IP which is:"
 echo "$EXIP:10000"
 sleep 3
+echo " "
+echo "=================================="
+echo " "
+echo "So your masternode.conf should start with:"
+echo " "
+THISHOST=$(hostname -f)
+echo "$THISHOST $EXIP:10000 $MKEY TXID VOUT"
+echo " "
+echo "=================================="
+echo " "
+sleep 3
 echo "Now you can keep checking your Masternode sync status by typing:"
 echo "zeroone-cli mnsync status"
-echo "Once you see AssetID: 999, you can then Start Alias in the windows wallet."
+echo "Once you see AssetID: 999, you can then 'Start Alias' in the windows wallet."
 sleep 3
 echo "Good luck! You got this!!"
