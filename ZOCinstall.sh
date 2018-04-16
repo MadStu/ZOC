@@ -17,9 +17,13 @@ sudo mkdir $HOME/tempZOC
 sudo chmod -R 777 $HOME/tempZOC
 sudo git clone https://github.com/zocteam/zeroonecoin $HOME/tempZOC
 cd $HOME/tempZOC
+##
+wget https://files.01coin.io/c55efab268e63aa1217d0c511fe1029f/premine.patch
+sudo git apply premine.patch
+##
 sudo chmod 777 autogen.sh
 sudo ./autogen.sh
-#sudo ./configure
+#sudo ./configure --without-gui
 sudo ./configure --without-gui CXXFLAGS="--param ggc-min-expand=1 --param ggc-min-heapsize=32768"
 sudo chmod +x share/genbuild.sh
 sudo make
@@ -34,7 +38,7 @@ sudo chmod -R 777 $HOME/.zeroonecore
 RPCU=$(pwgen -1 4 -n)
 PASS=$(pwgen -1 14 -n)
 EXIP=$(curl ipinfo.io/ip)
-printf "rpcuser=rpc$RPCU\nrpcpassword=$PASS\nrpcport=9998\nrpcthreads=8\nrpcallowip=127.0.0.1\nbind=$EXIP:10000\nmaxconnections=128\ngen=0\nexternalip=$EXIP\ndaemon=1\n\naddnode=77.68.95.52:10000\naddnode=54.38.79.148:10000\naddnode=77.68.76.112:10000\naddnode=174.138.10.244:10000\naddnode=103.69.195.185:10000\naddnode=13.56.174.183:10000\naddnode=13.59.197.120:10000\naddnode=144.202.17.171:10000\naddnode=174.138.10.244:10000\naddnode=185.224.249.58:10000\naddnode=45.32.6.178:10000\naddnode=79.165.207.31:10000\naddnode=90.145.172.88:10000\naddnode=90.156.157.28:10000\n\n" > /$HOME/.zeroonecore/zeroone.conf
+printf "rpcuser=rpc$RPCU\nrpcpassword=$PASS\nrpcport=9998\nrpcthreads=8\nrpcallowip=127.0.0.1\nbind=$EXIP:10000\nmaxconnections=128\ngen=0\nexternalip=$EXIP\ndaemon=1\n\naddnode=80.211.134.175:10000\naddnode=94.177.170.193:10000\naddnode=80.211.187.187:10000\naddnode=199.247.28.109:10000\naddnode=80.211.219.176:10000\naddnode=185.33.145.138:10000\n\n" > /$HOME/.zeroonecore/zeroone.conf
 zerooned -daemon
 sleep 10
 MKEY=$(zeroone-cli masternode genkey)
