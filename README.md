@@ -6,15 +6,17 @@ A novices guide to an Ubuntu 16.04 install
 ## 1. Send 1000 coins to yourself.
 
 If you haven't done so already, install the windows wallet from https://github.com/zocteam/zeroonecoin/releases 
-Create a new receive address and call it something like MN1.
+Create a new receive address and call it something like MN1. Although I like to call mine the name of my server so it's easier to track which VPS each MN is installed on.
+
 Then send 1000 ZOC coins to the address you just created. Make sure the address receives EXACTLY 1000 coins, so DO NOT tick the "Subtract fee from amount" option.
-We now need to wait for 15 confirmations of the transaction so we'll get on with the remote VPS install.
+We now need to *wait* for 15 confirmations of the transaction so we'll get on with the remote VPS install.
 
 
 
 ## 2. VPS
 
-Order a VPS. A VPS with 1GB RAM works great for me. I choose the Ubuntu 16.04 (server version without a desktop) operating system to install on although it would be easier to install on 14.04. I prefer 16.04 so that I can install other coin MN's on the same VPS.
+Order a VPS. A VPS with 1GB RAM works great for me. I choose the Ubuntu 16.04 (server version without a desktop) operating system to install on although it would be easier to install on 14.04 with other scripts which are available and can find on the Discord server here: https://discord.gg/JGBpp 
+I prefer 16.04 so that I can install other coin MN's on the same VPS, and I also prefer to compile it myself which is what this script does. It takes longer but I only have to do it once.
 A tried and tested place to get a VPS is from: https://goo.gl/hv2Hfc 
 
 
