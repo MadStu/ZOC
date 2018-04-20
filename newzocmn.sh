@@ -1,3 +1,4 @@
+#!/bin/bash
 clear
 sleep 1
 if [ -e getinfo.json ]
