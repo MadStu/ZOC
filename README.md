@@ -1,4 +1,4 @@
-# Step-by-Step guide to a ZOC Masternode setup
+# Step-by-Step guide to compiling a ZOC Masternode setup
 A novices guide to an Ubuntu 16.04 install
 
 ***
