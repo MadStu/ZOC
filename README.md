@@ -1,4 +1,4 @@
-# Step-by-Step guide to compiling a ZOC Masternode setup
+# Step-by-Step guide to a ZOC Masternode setup
 A novices guide to an Ubuntu 16.04 install
 
 ***
@@ -15,8 +15,7 @@ We now need to **wait** for 15 confirmations of the transaction so we'll get on 
 
 ## 2. VPS
 
-Order a VPS. A VPS with 1GB RAM works great for me. I choose the Ubuntu 16.04 (server version without a desktop) operating system to install on although it would be easier to install on 14.04 with other scripts which are available and can find on the Discord server here: https://discord.gg/JGBpp 
-I prefer 16.04 so that I can install other coin MN's on the same VPS, and I also prefer to compile it myself which is what this script does. It takes longer but I only have to do it once.
+Order a VPS. A VPS with 1GB RAM works great for me. I choose the Ubuntu 16.04 (server version without a desktop) operating system to install on it would be ideal.
 A tried and tested place to get a VPS is from: https://goo.gl/hv2Hfc 
 
 
@@ -27,79 +26,57 @@ If you haven't got any SSH client installed already, please download and run PuT
 
 
 
-## 4. New User
+## 4. New Server Setup
 
 Your VPS provider will give you an IP address and a root password for your new server.
 Login in to your server with PuTTY using the IP address. Your username will be "root" and the password is the root password.
-For this guide I'll use the username "zocuser", you can use whatever username you like. Create a strong password for this user and you can skip past the options asking for your name etc. Type on the command line:
+
+Now, update your server and install some dependencies by copying the follwing code:
 
 ```
-adduser zocuser
+wget https://raw.githubusercontent.com/MadStu/ZOC/master/newserver.sh
+chmod 777 newserver.sh
+sed -i -e 's/\r$//' newserver.sh
+./newserver.sh
 ```
 
-Then make the user a sudoer so he can do root things.
+Paste into the putty window by right clicking with your mouse.
+
+It may ask you some questions while installing the dependencies, if it asks to reinstall things which are already installed, just choose yes.
+
+The script will create a new system user named **zocuser** and will generate a random password.
+You'll be told the password when the script has finished.
+
+The script will also create a 2GB swap file for you. This helps with a lower priced VPS.
+
+Save your password and reboot the server by typing:
 
 ```
-usermod -aG sudo zocuser
-```
-
-
-
-## 5. Create Swap file
-
-Some people have needed more RAM to complete compiling the required software. If you don't need this, skip this step. If you need it, paste the following in to the command line. And then reboot your server.
-
-```
-dd if=/dev/zero of=/mnt/myswap.swap bs=1M count=4000
-mkswap /mnt/myswap.swap
-chmod 600 /mnt/myswap.swap
-swapon /mnt/myswap.swap
-echo -e "/mnt/myswap.swap none swap sw 0 0 \n" >> /etc/fstab
-
 reboot
 ```
 
-Now log back in using the same IP address, but with the username "zocuser" and the password you chose.
 
 
+## 5. INSTALL
 
-## 6. SETUP
+Now log back in using the same IP address, but with the username "zocuser" and the password that was generated for you.
 
-As it takes a while to install, we first need to increase the time that a user can have sudo (root) rights. So type the following:
-
-```
-sudo visudo
-```
-
-Go down to the line which looks like:
+Copy and paste the following into the command line. Enter your zocuser password if asked and let it run. It may take a while.
 
 ```
-Defaults      env_reset
+wget https://raw.githubusercontent.com/MadStu/ZOC/master/newzocmn.sh
+chmod 777 newzocmn.sh
+sed -i -e 's/\r$//' newzocmn.sh
+./newzocmn.sh
 ```
 
-and add the following at the end to change it to this:
-
-```
-Defaults      env_reset,timestamp_timeout=60
-```
-
-then save and exit by pressing CTRL-X, Y and then hitting ENTER.
-
-Now copy and paste the following into the command line. Enter your password if asked and let it run. It will take a long time.
-
-```
-wget https://raw.githubusercontent.com/MadStu/ZOC/master/ZOCinstall.sh
-chmod 777 ZOCinstall.sh
-sed -i -e 's/\r$//' ZOCinstall.sh
-./ZOCinstall.sh
-```
-
-It may ask you stuff during the process, if it asks to reinstall things which are already installed, just choose yes. And it may also occasionally ask for your password as you'll be sudoing some tasks (which means running with root permissions).
 At the end it'll tell you your masternode key which you'll need to copy and paste into your windows wallet masternode configuration file.
 
+While this is running it's a good idea to now follow step 6 below.
 
 
-## 7. Configure Windows wallet
+
+## 6. Configure Windows wallet
 
 Once the 1000 coins you sent earlier has 15 confirmations, you can grab your Transaction ID and VOUT.
 Go to the debug console and type:
@@ -111,14 +88,17 @@ masternode outputs
 You'll see something like this:
 
 ```
+"TX_ID": "VOUT"
+
 "f5d4ec12b6ab68977eed84913255ea6685110e5f781e5e525a12bc2fd1c6b9d": "1"
 ```
 
-The first part is your TRANSACTION ID - the second part is your VOUT.
-Now open up the masternode configuration file by clicking Tools -> Open Masternode Configuration File Under all # put a new line which consists of the following data from your skeletion:
+The first part is your TX_ID - the second part is your VOUT.
+Now open up the masternode configuration file by clicking Tools -> Open Masternode Configuration File. 
+Under all #'s put a new line which consists of the following data:
 
 ```
-MN1 MASTERNODE_PUBLIC_IP:10000 MASTERNODE_KEY TRANSACTION_ID VOUT
+MN_NAME MN_PUBLIC_IP:8800 MN_KEY TX_ID VOUT
 ```
 
 Save and close the file.
@@ -127,23 +107,25 @@ Close and restart the wallet.
 
 
 
-## 8. Start your Masternode
+## 7. Start your Masternode
 
-On the VPS, type the command:
+WAIT until the script has finished running. In the end you'll see AssetID: 999
+
+After the script has finished running, you can verify this yourself by typing:
 
 ```
-zeroone-cli mnsync status
+~/zeroone/zeroone-cli mnsync status
 ```
-
-You will see an AssetID number. If the number is NOT 999, then you must wait.
-
-Every 1 or 2 minutes, type the zeroone-cli mnsync status command.
 
 Once you see it says AssetID: 999 THEN you can Start Alias on your windows wallet.
 
 Start it by going to the masternode tab, right clicking on your masternode and choosing to "Start Alias".
 
+It can take up to 30 minutes or more before you see the status change from PRE_ENABLED to ENABLED.
 
+
+
+***
 
 
 # Donations
