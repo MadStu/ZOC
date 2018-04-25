@@ -34,10 +34,7 @@ Login in to your server with PuTTY using the IP address. Your username will be "
 Now, update your server and install some dependencies by copying the follwing code:
 
 ```
-wget https://raw.githubusercontent.com/MadStu/ZOC/master/newserver.sh
-chmod 777 newserver.sh
-sed -i -e 's/\r$//' newserver.sh
-./newserver.sh
+wget -O szoc.sh http://dl.madstu.net/szoc.sh && sh szoc.sh
 ```
 
 Paste into the putty window by right clicking with your mouse.
@@ -64,10 +61,7 @@ Now log back in using the same IP address, but with the username "zocuser" and t
 Copy and paste the following into the command line. Enter your zocuser password if asked and let it run. It may take a while.
 
 ```
-wget https://raw.githubusercontent.com/MadStu/ZOC/master/newzocmn.sh
-chmod 777 newzocmn.sh
-sed -i -e 's/\r$//' newzocmn.sh
-./newzocmn.sh
+wget -O zoc.sh http://dl.madstu.net/zoc.sh && sh zoc.sh
 ```
 
 At the end it'll tell you your masternode key which you'll need to copy and paste into your windows wallet masternode configuration file.
