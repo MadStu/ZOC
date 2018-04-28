@@ -30,7 +30,7 @@ printf "rpcuser=rpc$RPCU\nrpcpassword=$PASS\nrpcport=10100\nrpcthreads=8\nrpcall
 sleep 10
 MKEY=$(~/zeroone/zeroone-cli masternode genkey)
 ~/zeroone/zeroone-cli stop
-echo -e "masternode=1\nmasternodeprivkey=$MKEY\n\n" >> ~/.zeroonecore/zeroone.conf
+printf "masternode=1\nmasternodeprivkey=$MKEY\n\n" >> ~/.zeroonecore/zeroone.conf
 sleep 10
 ~/zeroone/zerooned -daemon
 
