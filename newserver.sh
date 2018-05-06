@@ -17,7 +17,7 @@ sudo apt-get -y install python-virtualenv virtualenv
 sudo apt-get install nano jq htop git pwgen -y
 PASS=$(pwgen -1 14 -n)
 
-useradd -m -p sowgm4gwgewgpawgggss -s /bin/bash zocuser
+useradd -m -s /bin/bash zocuser
 echo 'zocuser:$PASS' | chpasswd
 usermod -aG sudo zocuser
 
