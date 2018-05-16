@@ -18,7 +18,7 @@ sudo apt-get install nano jq htop git pwgen -y
 PASS=$(pwgen -1 14 -n)
 
 useradd -m -s /bin/bash zocuser
-echo 'zocuser:$PASS' | chpasswd
+echo "zocuser:$PASS" | chpasswd
 usermod -aG sudo zocuser
 
 dd if=/dev/zero of=/mnt/myswap.swap bs=1M count=2000
