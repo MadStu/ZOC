@@ -10,3 +10,4 @@ crontab -l > mycron
 echo "* * * * * cd $(pwd) && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1" >> mycron
 crontab mycron
 rm mycron
+./venv/bin/py.test ./test
